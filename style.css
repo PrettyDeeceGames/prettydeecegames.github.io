@@ -1,15 +1,27 @@
-/* Pretty Deece Games - Placeholder Styles */
+/* Pretty Deece Games - Modern Theme */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap');
+
+:root {
+  --primary: #2D1B69;
+  --secondary: #00B4D8;
+  --background: #F8F9FA;
+  --text: #212529;
+  --accent: #FF6B6B;
+  --white: #FFFFFF;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #fdf6e3;
-  color: #333;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, var(--background) 0%, #E9ECEF 100%);
+  color: var(--text);
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   flex-direction: column;
   text-align: center;
 }
@@ -18,32 +30,66 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 2rem;
+  padding: 2rem;
+  background: var(--white);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+  max-width: 90%;
+  width: 600px;
 }
 
 .logo-centered {
   max-width: 300px;
   width: 80%;
   height: auto;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.logo-centered:hover {
+  transform: scale(1.05);
 }
 
 h1 {
-  font-size: 1.8rem;
-  padding: 0 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0;
+  padding: 0 1rem;
+  line-height: 1.4;
 }
 
 .blog-button {
   display: inline-block;
-  padding: 12px 24px;
-  background-color: #4a90e2;
-  color: white;
+  padding: 1rem 2rem;
+  background-color: var(--secondary);
+  color: var(--white);
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 0.5rem;
   font-weight: 600;
-  transition: background-color 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
 }
 
 .blog-button:hover {
-  background-color: #357abd;
+  background-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  .blog-button {
+    padding: 0.8rem 1.6rem;
+  }
 }
