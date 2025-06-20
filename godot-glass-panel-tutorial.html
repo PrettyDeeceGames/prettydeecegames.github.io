@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reusable Frosted-Glass UI Panel in Godot 4.x (Inspector-Driven, No Custom Scripts) - Pretty Deece Games</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: var(--background);
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+    }
+
+    .tutorial-container {
+      display: flex;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .tutorial-content {
+      flex: 3;
+      background: var(--white);
+      padding: 3rem 4rem;
+      border-radius: 1rem;
+      box-shadow: var(--shadow-lg);
+      text-align: left;
+    }
+
+    /* Improve readability with max-width on paragraphs */
+    .tutorial-content p {
+      max-width: 65ch;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .tutorial-sidebar {
+      flex: 1;
+      position: sticky;
+      top: 2rem;
+      height: fit-content;
+      padding: 1.5rem;
+      background: var(--white);
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--secondary);
+    }
+
+    .tutorial-sidebar h3 {
+      margin-top: 0;
+      color: var(--primary);
+      border-bottom: 2px solid var(--light-gray);
+      padding-bottom: 0.5rem;
+    }
+
+    .tutorial-sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tutorial-sidebar ul li a {
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--light-gray);
+      transition: color 0.2s ease;
+      font-weight: 500;
+    }
+    
+    .tutorial-sidebar ul li a:hover {
+      color: var(--secondary);
+    }
+
+    .tutorial-content h1, .tutorial-content h2, .tutorial-content h3 {
+      color: var(--primary);
+      margin-top: 2.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tutorial-content h1 {
+        font-size: 2.5rem;
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    .tutorial-content .subtitle {
+        font-size: 1.1rem;
+        color: var(--text);
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    .tutorial-content hr {
+        border: 0;
+        border-top: 1px solid #e0e0e0;
+        margin: 3rem 0;
+    }
+
+    .tutorial-content figure {
+        margin: 2rem 0;
+        text-align: center;
+    }
+
+    .tutorial-content img {
+        max-width: 100%;
+        border-radius: 0.5rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .tutorial-content figcaption {
+        font-size: 0.9rem;
+        color: #777;
+        margin-top: 0.75rem;
+        font-style: italic;
+    }
+    
+    .tutorial-content ul, .tutorial-content ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1.5rem;
+        max-width: 65ch;
+    }
+    
+    .tutorial-content li {
+        margin-bottom: 0.75rem;
+        line-height: 1.8;
+    }
+    
+    /* Improved code block styling */
+    .tutorial-content pre {
+        background-color: #1e1e1e;
+        color: #d4d4d4;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        overflow-x: auto;
+        margin: 1.5rem 0;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        max-width: 100%;
+    }
+    
+    .tutorial-content code {
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        background-color: #f0f0f0;
+        color: #d73a49;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+        font-size: 0.9em;
+    }
+    
+    .tutorial-content pre code {
+      padding: 0;
+      background-color: transparent;
+      color: #d4d4d4;
+      border-radius: 0;
+      font-size: inherit;
+    }
+
+    /* Special styling for the scene structure code block */
+    .scene-structure {
+      background-color: #2d2d30;
+      color: #cccccc;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      margin: 1.5rem 0;
+      line-height: 1.8;
+    }
+
+    .scene-structure .arrow {
+      color: #569cd6;
+      padding: 0 0.5rem;
+    }
+
+    .tutorial-content blockquote {
+        border-left: 4px solid var(--secondary);
+        padding: 1rem 1.5rem;
+        margin: 1.5rem 0;
+        font-style: italic;
+        color: var(--text);
+        background-color: #f8f9fa;
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+
+    .tutorial-content blockquote strong {
+        font-style: normal;
+    }
+
+    /* Improved table styling */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 2rem 0;
+        background-color: #fff;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        border-radius: 0.5rem;
+        overflow: hidden;
+    }
+
+    th, td {
+        border: none;
+        padding: 1rem 1.5rem;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f8f9fa;
+        color: var(--primary);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+    }
+
+    tbody tr {
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    tbody tr:last-child {
+        border-bottom: none;
+    }
+
+    tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    td strong {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .back-button {
+      margin-bottom: 2rem;
+      display: inline-block;
+      font-weight: 600;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .tutorial-container {
+        flex-direction: column;
+      }
+      
+      .tutorial-content {
+        padding: 2rem 1.5rem;
+      }
+      
+      .tutorial-sidebar {
+        position: relative;
+        top: 0;
+        margin-top: 2rem;
+      }
+
+      table {
+        font-size: 0.9rem;
+      }
+
+      th, td {
+        padding: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="tutorial-container">
+    <div class="tutorial-content">
+        <a href="blog.html" class="blog-button back-button">← Back to Blog</a>
+        <article>
+            <h1 id="main-title">Reusable Frosted-Glass UI Panel in Godot 4.x (Inspector-Driven, No Custom Scripts)</h1>
+            <p class="subtitle">Here's my step-by-step walkthrough for making a reusable frosted-glass UI panel in Godot 4.x. This is mainly for my own notes, but if you're here, maybe it'll save you some time too. Everything's Inspector-driven—no custom scripts other than the blur shader. It's clean, flexible, and meant to work across different screen sizes without headaches. Feel free to copy, tweak, and make it your own.</p>
+            
+            <hr>
+            
+            <p><strong>Time Required:</strong> 10 – 15 minutes</p>
+            <div>
+                <p><strong>Prerequisites:</strong></p>
+                <ul>
+                    <li>Godot 4.x installed</li>
+                    <li>Basic familiarity with the Scene dock & Inspector</li>
+                </ul>
+            </div>
+
+            <hr>
+            
+            <h2 id="what-youll-build">1. What You'll Build</h2>
+            <p>A reusable frosted-glass UI panel:</p>
+            <ul>
+                <li>Live blur of the scene behind it</li>
+                <li>Adjustable transparency & tint</li>
+                <li>Rounded corners + colored border</li>
+                <li>Zero code after the shader</li>
+            </ul>
+            <figure>
+                <img src="assets/blogAssets/FrostedPanelTutorial/01_final_glass_panel_example.png" alt="Final glass panel example">
+                <figcaption>Final glass panel overlaying a colorful background</figcaption>
+            </figure>
+
+            <hr>
+            
+            <h2 id="quick-start">2. Quick-Start Guide</h2>
+            
+            <h3 id="scene-structure">2-1 Create the Scene Structure</h3>
+            <ol>
+                <li><strong>File → New Scene</strong></li>
+                <li>Select <strong>Control</strong> as root → rename <strong>GlassPanel</strong></li>
+                <li>Add children <strong>in this order</strong>:</li>
+            </ol>
+            
+            <div class="scene-structure">
+                Panel<span class="arrow">→</span>BlurPanel<br>
+                Panel<span class="arrow">→</span>GlassPanelPanel<br>
+                Control<span class="arrow">→</span>ContentContainer
+            </div>
+            
+            <figure>
+                <img src="assets/blogAssets/FrostedPanelTutorial/02_scene_dock_structure.png" alt="Scene Dock hierarchy">
+                <figcaption>Scene Dock hierarchy in correct order</figcaption>
+            </figure>
+            <blockquote><strong>Why order matters</strong> — BlurPanel renders first, GlassPanelPanel adds the glass styling, ContentContainer sits on top for your UI.</blockquote>
+
+            <h3 id="position-size">2-2 Position & Size the Root Panel</h3>
+            <p>Select <code>GlassPanel</code> → Inspector → Layout → Anchors Preset → <strong>Custom</strong></p>
+            <table>
+                <thead><tr><th>Field</th><th>Value</th></tr></thead>
+                <tbody>
+                    <tr><td>Anchor Left / Right</td><td><strong>1.0</strong></td></tr>
+                    <tr><td>Anchor Top / Bottom</td><td><strong>0.0</strong></td></tr>
+                    <tr><td>Offset Left</td><td><strong>-300</strong></td></tr>
+                    <tr><td>Offset Top</td><td><strong>50</strong></td></tr>
+                    <tr><td>Offset Right</td><td><strong>0</strong></td></tr>
+                    <tr><td>Offset Bottom</td><td><strong>200</strong></td></tr>
+                    <tr><td>Grow Horizontal</td><td><strong>Left</strong></td></tr>
+                </tbody>
+            </table>
+            <figure>
+                <img src="assets/blogAssets/FrostedPanelTutorial/03_inspector_anchors_offsets.png" alt="Inspector anchors and offsets">
+                <figcaption>Anchors & offsets that keep the panel glued to the top-right</figcaption>
+            </figure>
+            <p>💡 <strong>Resize on demand</strong> — tweak the four offset values (or even anchor points) any time to change size and placement.</p>
+
+            <h3 id="full-rect-children">2-3 Full-Rect the Children</h3>
+            <p>Select <strong>BlurPanel</strong>, <strong>GlassPanelPanel</strong>, <strong>ContentContainer</strong> → Layout → Anchors Preset → <strong>Full Rect</strong>.</p>
+            <figure>
+                <img src="assets/blogAssets/FrostedPanelTutorial/04_child_full_rect_preset.png" alt="Full Rect preset for child">
+                <figcaption>Full Rect preset applied to a child</figcaption>
+            </figure>
+
+            <h3 id="create-shader">2-4 Create the Blur Shader</h3>
+            <ol>
+                <li><em>FileSystem → New Resource → Shader</em> → save <strong>glass_blur.gdshader</strong></li>
+                <li>Paste the Gaussian-blur code (see Appendix).</li>
+            </ol>
+            <figure>
+                <img src="assets/blogAssets/FrostedPanelTutorial/05_shader_code_snippet.png" alt="Blur shader code snippet">
+                <figcaption>Blur shader highlighted</figcaption>
+            </figure>
+            
+            <h3 id="apply-material">2-5 Create & Apply the Shader Material</h3>
+            <ol>
+                <li><em>FileSystem → New Resource → ShaderMaterial</em> → save <strong>glass_material.tres</strong></li>
+                <li>Inspector → assign <strong>glass_blur.gdshader</strong></li>
+                <li>Set <strong>blur_amount = 2.0</strong></li>
+                <li>Drag material to <strong>BlurPanel</strong>.</li>
+            </ol>
+            <figure>
+                <img src="assets/blogAssets/FrostedPanelTutorial/06_material_applied_blurpanel.png" alt="Material applied to BlurPanel">
+                <figcaption>ShaderMaterial assigned & blur_amount exposed</figcaption>
+            </figure>
+
+            <h3 id="test-blur">2-6 Test the Blur</h3>
+            <p><em>Temporary setup</em> — Add a <code>Node2D</code> as new root, put a colorful <code>ColorRect</code> behind <strong>GlassPanel</strong>, then <strong>F5</strong>.</p>
+            <figure>
+                <img src="https://via.placeholder.com/600x400.png?text=Capture+Needed" alt="Placeholder for blur effect test">
+                <figcaption>Should show soft blur behind the panel (Placeholder)</figcaption>
+            </figure>
+            <p>If the panel is clear, double-check: material assigned, <code>blur_amount > 0</code>, something colorful <strong>behind</strong> the panel.</p>
+
+            <h3 id="style-glass">2-7 Style the Glass</h3>
+            <ol>
+                <li>Select <strong>GlassPanelPanel</strong></li>
+                <li>Inspector → <em>Theme Overrides → Styles → Panel</em> → <strong>New StyleBoxFlat</strong></li>
+                <li>Configure:
+                    <ul>
+                        <li><strong>BG Color:</strong> white @ <em>Alpha 0.2</em></li>
+                        <li><strong>Border Color:</strong> light blue @ <em>Alpha 0.3</em></li>
+                        <li><strong>Border Width:</strong> 6 (all sides)</li>
+                        <li><strong>Corner Radius:</strong> 20</li>
+                    </ul>
+                </li>
+            </ol>
+            <figure>
+                <img src="assets/blogAssets/FrostedPanelTutorial/07_glass_styling_inspector.png" alt="StyleBoxFlat settings">
+                <figcaption>StyleBoxFlat settings</figcaption>
+            </figure>
+
+            <h3 id="final-test">2-8 Final Test</h3>
+            <p>Run <strong>F5</strong>—you should now see blur + rounded, tinted glass.</p>
+            <figure>
+                <img src="assets/blogAssets/FrostedPanelTutorial/01_final_glass_panel_example.png" alt="Finished look">
+                <figcaption>Finished look (re-used)</figcaption>
+            </figure>
+            
+            <hr>
+            
+            <h2 id="helpful-hints">3. Helpful Hints</h2>
+            <ul>
+                <li><strong>Adjust sizes anytime</strong> via the root panel's offsets.</li>
+                <li><strong>Inherited scenes</strong> → <em>Scene → New Inherited Scene</em> from <code>GlassPanel.tscn</code> to create variants with unique size, position, or content—no prefab duplication.</li>
+            </ul>
+
+            <hr>
+
+            <h2 id="common-positions">4. Common Positions</h2>
+            <table>
+              <thead><tr><th>Position</th><th>Anchors</th><th>Offsets (L,T,R,B)</th><th>Grow Horiz</th></tr></thead>
+              <tbody>
+                <tr><td>Top-Left small</td><td>0,0,0,0</td><td>50 50 300 200</td><td>Right</td></tr>
+                <tr><td>Centered</td><td>0.5 0.5 0.5 0.5</td><td>-150 -100 150 100</td><td>Both</td></tr>
+                <tr><td>Bottom full-width</td><td>0 1 1 1</td><td>0 -150 0 0</td><td>Both</td></tr>
+              </tbody>
+            </table>
+            
+            <hr>
+
+            <h2 id="styling-presets">5. Styling Presets</h2>
+            <table>
+              <thead><tr><th>Use Case</th><th>BG Alpha</th><th>Border Width</th><th>Blur</th></tr></thead>
+              <tbody>
+                <tr><td>Subtle HUD</td><td>0.1</td><td>2</td><td>1.0</td></tr>
+                <tr><td>Prominent Menu</td><td>0.3</td><td>8</td><td>4.0</td></tr>
+                <tr><td>Dark Theme</td><td>Black @ 0.2</td><td>Dark @ 0.5</td><td>2.0</td></tr>
+              </tbody>
+            </table>
+
+            <hr>
+
+            <h2 id="performance-notes">6. Performance Notes</h2>
+            <ul>
+                <li>Keep <strong>blur_amount ≤ 5</strong> on mobile.</li>
+                <li>Re-use <strong>one</strong> ShaderMaterial across panels.</li>
+                <li>Animate opacity, not blur, for cheap fades.</li>
+            </ul>
+
+            <hr>
+
+            <h2 id="troubleshooting">7. Troubleshooting Cheatsheet</h2>
+            <table>
+              <thead><tr><th>Symptom</th><th>Fixes</th></tr></thead>
+              <tbody>
+                <tr><td>Panel invisible</td><td>Check anchors/offsets, StyleBox assigned, on-screen position</td></tr>
+                <tr><td>No blur</td><td>Material on BlurPanel? <code>blur_amount > 0</code>? Something to blur behind it?</td></tr>
+                <tr><td>Wrong position</td><td>Revisit anchor math; remember negative offsets move inward</td></tr>
+              </tbody>
+            </table>
+
+            <hr>
+
+            <h2 id="anchor-crash-course">8. Anchor Crash-Course</h2>
+            <ul>
+                <li><strong>Anchors (0-1)</strong> = relative position on parent.</li>
+                <li><strong>Offsets (px)</strong> = distance <em>from</em> that anchor.</li>
+                <li><strong>Grow Direction</strong> decides which edge stretches.</li>
+            </ul>
+            <p>Responsive UI in Godot is 90% anchor logic—master this panel and the rest comes free.</p>
+
+            <hr>
+
+            <h2 id="next-steps">9. Next Steps</h2>
+            <ul>
+                <li>Drop buttons & labels into <strong>ContentContainer</strong>.</li>
+                <li>Animate panel fade-ins.</li>
+                <li>Duplicate via inherited scenes for multiple HUD elements.</li>
+            </ul>
+            <figure>
+                <img src="https://via.placeholder.com/600x400.png?text=Capture+Needed" alt="Placeholder for extended UI">
+                <figcaption>Example panel with menu buttons (Placeholder)</figcaption>
+            </figure>
+            <p>Save the scene as <strong>GlassPanel.tscn</strong> and make it your go-to glass component.</p>
+            
+        </article>
+
+    </div>
+    <aside class="tutorial-sidebar">
+      <h3>On This Page</h3>
+      <ul>
+        <li><a href="#what-youll-build">1. What You'll Build</a></li>
+        <li><a href="#quick-start">2. Quick-Start Guide</a></li>
+        <li><a href="#helpful-hints">3. Helpful Hints</a></li>
+        <li><a href="#common-positions">4. Common Positions</a></li>
+        <li><a href="#styling-presets">5. Styling Presets</a></li>
+        <li><a href="#performance-notes">6. Performance Notes</a></li>
+        <li><a href="#troubleshooting">7. Troubleshooting Cheatsheet</a></li>
+        <li><a href="#anchor-crash-course">8. Anchor Crash-Course</a></li>
+        <li><a href="#next-steps">9. Next Steps</a></li>
+      </ul>
+    </aside>
+  </div>
+</body>
+</html>
