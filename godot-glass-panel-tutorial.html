@@ -352,7 +352,7 @@
             <h3 id="create-shader">2-4 Create the Blur Shader</h3>
             <ol>
                 <li><em>FileSystem → New Resource → Shader</em> → save <strong>glass_blur.gdshader</strong></li>
-                <li>Paste the Gaussian-blur code (see Appendix).</li>
+                <li>Paste the Gaussian-blur code (<a href="#appendix-shader">see Appendix</a>).</li>
             </ol>
             <figure>
                 <img src="assets/blogAssets/FrostedPanelTutorial/05_shader_code_snippet.png" alt="Blur shader code snippet">
@@ -481,6 +481,46 @@
             </figure>
             <p>Save the scene as <strong>GlassPanel.tscn</strong> and make it your go-to glass component.</p>
             
+            <hr>
+            
+            <h2 id="appendix-shader">Appendix: Full Shader Code</h2>
+            <p>This is the complete Gaussian blur shader for the <code>glass_blur.gdshader</code> file. It samples the screen behind the panel and applies a two-pass blur that can be adjusted in the Inspector.</p>
+            <pre><code class="language-glsl">shader_type canvas_item;
+
+// This samples the screen behind the panel for the blur effect
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+// This controls how much blur we apply (0 = no blur, 10 = maximum blur)
+uniform float blur_amount : hint_range(0, 10) = 2.0;
+
+// Gaussian blur weights for smooth, professional-looking blur
+const float weights[5] = float[5](0.227027, 0.316216, 0.070270, 0.008347, 0.000000);
+
+void fragment() {
+    vec2 tex_size = vec2(textureSize(SCREEN_TEXTURE, 0));
+    vec2 pixel_size = 1.0 / tex_size;
+    float radius = blur_amount * 2.0;
+    
+    // Horizontal blur pass
+    vec4 color = texture(SCREEN_TEXTURE, SCREEN_UV) * weights[0];
+    for(int i = 1; i < 5; i++) {
+        float weight = weights[i];
+        vec2 offset = vec2(float(i)) * pixel_size * radius;
+        color += texture(SCREEN_TEXTURE, SCREEN_UV + offset) * weight;
+        color += texture(SCREEN_TEXTURE, SCREEN_UV - offset) * weight;
+    }
+    
+    // Vertical blur pass
+    vec4 final_color = color * weights[0];
+    for(int i = 1; i < 5; i++) {
+        float weight = weights[i];
+        vec2 offset = vec2(0.0, float(i)) * pixel_size * radius;
+        final_color += texture(SCREEN_TEXTURE, SCREEN_UV + offset) * weight;
+        final_color += texture(SCREEN_TEXTURE, SCREEN_UV - offset) * weight;
+    }
+    
+    COLOR = final_color;
+}</code></pre>
+
         </article>
 
     </div>
@@ -496,6 +536,7 @@
         <li><a href="#troubleshooting">7. Troubleshooting Cheatsheet</a></li>
         <li><a href="#anchor-crash-course">8. Anchor Crash-Course</a></li>
         <li><a href="#next-steps">9. Next Steps</a></li>
+        <li><a href="#appendix-shader">Appendix</a></li>
       </ul>
     </aside>
   </div>
