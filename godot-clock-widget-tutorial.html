@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glass Panel Clock & Currency UI - Part 2 - Pretty Deece Games</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: var(--background);
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+    }
+
+    .tutorial-container {
+      display: flex;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .tutorial-content {
+      flex: 3;
+      background: var(--white);
+      padding: 3rem 4rem;
+      border-radius: 1rem;
+      box-shadow: var(--shadow-lg);
+      text-align: left;
+    }
+
+    /* Improve readability with max-width on paragraphs */
+    .tutorial-content p {
+      max-width: 65ch;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .tutorial-sidebar {
+      flex: 1;
+      position: sticky;
+      top: 2rem;
+      height: fit-content;
+      padding: 1.5rem;
+      background: var(--white);
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--secondary);
+    }
+
+    .tutorial-sidebar h3 {
+      margin-top: 0;
+      color: var(--primary);
+      border-bottom: 2px solid var(--light-gray);
+      padding-bottom: 0.5rem;
+    }
+
+    .tutorial-sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tutorial-sidebar ul li a {
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--light-gray);
+      transition: color 0.2s ease;
+      font-weight: 500;
+    }
+    
+    .tutorial-sidebar ul li a:hover {
+      color: var(--secondary);
+    }
+
+    .tutorial-content h1, .tutorial-content h2, .tutorial-content h3 {
+      color: var(--primary);
+      margin-top: 2.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tutorial-content h1 {
+        font-size: 2.5rem;
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    .tutorial-content .subtitle {
+        font-size: 1.1rem;
+        color: var(--text);
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    .tutorial-content hr {
+        border: 0;
+        border-top: 1px solid #e0e0e0;
+        margin: 3rem 0;
+    }
+
+    .tutorial-content figure {
+        margin: 2rem 0;
+        text-align: center;
+    }
+
+    .tutorial-content img {
+        max-width: 100%;
+        border-radius: 0.5rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .tutorial-content figcaption {
+        font-size: 0.9rem;
+        color: #777;
+        margin-top: 0.75rem;
+        font-style: italic;
+    }
+    
+    .tutorial-content ul, .tutorial-content ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1.5rem;
+        max-width: 65ch;
+    }
+    
+    .tutorial-content li {
+        margin-bottom: 0.75rem;
+        line-height: 1.8;
+    }
+    
+    /* Improved code block styling */
+    .tutorial-content pre {
+        background-color: #1e1e1e;
+        color: #d4d4d4;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        overflow-x: auto;
+        margin: 1.5rem 0;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        max-width: 100%;
+    }
+    
+    .tutorial-content code {
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        background-color: #f0f0f0;
+        color: #d73a49;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+        font-size: 0.9em;
+    }
+    
+    .tutorial-content pre code {
+      padding: 0;
+      background-color: transparent;
+      color: #d4d4d4;
+      border-radius: 0;
+      font-size: inherit;
+    }
+
+    /* Special styling for the scene structure code block */
+    .scene-structure {
+      background-color: #2d2d30;
+      color: #cccccc;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      margin: 1.5rem 0;
+      line-height: 1.8;
+    }
+
+    .scene-structure .arrow {
+      color: #569cd6;
+      padding: 0 0.5rem;
+    }
+
+    .tutorial-content blockquote {
+        border-left: 4px solid var(--secondary);
+        padding: 1rem 1.5rem;
+        margin: 1.5rem 0;
+        font-style: italic;
+        color: var(--text);
+        background-color: #f8f9fa;
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+
+    .tutorial-content blockquote strong {
+        font-style: normal;
+    }
+
+    /* Improved table styling */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 2rem 0;
+        background-color: #fff;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        border-radius: 0.5rem;
+        overflow: hidden;
+    }
+
+    th, td {
+        border: none;
+        padding: 1rem 1.5rem;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f8f9fa;
+        color: var(--primary);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+    }
+
+    tbody tr {
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    tbody tr:last-child {
+        border-bottom: none;
+    }
+
+    tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    td strong {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .back-button {
+      margin-bottom: 2rem;
+      display: inline-block;
+      font-weight: 600;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .tutorial-container {
+        flex-direction: column;
+      }
+      
+      .tutorial-content {
+        padding: 2rem 1.5rem;
+      }
+      
+      .tutorial-sidebar {
+        position: relative;
+        top: 0;
+        margin-top: 2rem;
+      }
+
+      table {
+        font-size: 0.9rem;
+      }
+
+      th, td {
+        padding: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="tutorial-container">
+    <div class="tutorial-content">
+        <a href="blog.html" class="blog-button back-button">← Back to Blog</a>
+        <article>
+            <h1 id="main-title">Glass Panel Clock & Currency UI - Part 2</h1>
+            <p class="subtitle">My notes on building a practical clock/currency display using the glass panel from Part 1. Been working on turning that glass panel template into something actually useful – a clock-and-currency widget for the top-right corner. Figured I'd document the process since it covers some good UI-layout techniques that might help others (or future me when I forget how I did this).</p>
+            
+            <hr>
+            
+            <p><strong>Time Required:</strong> 20 – 30 minutes</p>
+            <div>
+                <p><strong>Prerequisites:</strong></p>
+                <ul>
+                    <li>Completed <a href="godot-glass-panel-tutorial.html">Part 1: Glass Panel Tutorial</a></li>
+                    <li>Godot 4.x installed</li>
+                    <li>Basic familiarity with the Scene dock & Inspector</li>
+                    <li>A currency icon image (32×32 PNG recommended)</li>
+                </ul>
+            </div>
+
+            <hr>
+            
+            <h2 id="what-youll-build">1. What You'll Build</h2>
+            <p>A functional clock-and-currency widget:</p>
+            <ul>
+                <li>Reuses the glass panel template from Part 1</li>
+                <li>Professional layout with time, date, and currency display</li>
+                <li>Top-right corner positioning</li>
+                <li>Ready for dynamic scripting (Part 3)</li>
+            </ul>
+            <figure>
+                <img src="assets/blogAssets/ClockWidgetWalkthrough/clock_currency_widget_01_final_ingame.png" alt="Final clock and currency widget">
+                <figcaption>Final clock and currency widget in the top-right corner</figcaption>
+            </figure>
+
+            <hr>
+            
+            <h2 id="project-setup">2. Project Setup & Scene Structure</h2>
+            
+            <h3 id="save-template">2-1 Save the Glass Panel as a Reusable Template</h3>
+            <p>First thing – turn that glass panel from Part 1 into something we can reuse everywhere.</p>
+            <ol>
+                <li><strong>Open your glass-panel scene from Part 1</strong></li>
+                <li><strong>Save it with a clear name:</strong> File → Save Scene As → "GlassPanel.tscn"</li>
+                <li><strong>Close the scene</strong> – we'll instance it in our new widget</li>
+            </ol>
+            <blockquote><strong>Why this matters</strong> — This becomes our reusable template. Any improvements to the glass effect will automatically update everywhere we use it.</blockquote>
+
+            <h3 id="create-widget-scene">2-2 Create the Clock Widget Scene</h3>
+            <p>Now for the actual widget scene.</p>
+            <ol>
+                <li><strong>Create New Scene:</strong> File → New Scene</li>
+                <li><strong>Choose "UI Scene"</strong> – this gives us a Control root node (important for anchoring)</li>
+                <li><strong>Rename root to "ClockWidgetRoot"</strong></li>
+                <li><strong>Save scene as "ClockCurrencyWidget.tscn"</strong></li>
+            </ol>
+            <blockquote><strong>Important:</strong> Using Control root instead of Node2D is crucial – Node2D doesn't provide proper bounds for UI anchoring, which makes positioning a nightmare.</blockquote>
+
+            <h3 id="instance-template">2-3 Instance the Glass Panel Template</h3>
+            <p>Instead of rebuilding the glass effect from scratch, we'll reuse our template.</p>
+            <ol>
+                <li><strong>Right-click ClockWidgetRoot → Instance Child Scene</strong></li>
+                <li><strong>Select "GlassPanel.tscn" from the file browser</strong></li>
+                <li><strong>Important:</strong> Right-click the instanced GlassPanelTemplate → "Editable Children"</li>
+            </ol>
+            <figure>
+                <img src="assets/blogAssets/ClockWidgetWalkthrough/clock_currency_widget_03_editable_children_toggle.png" alt="Editable Children toggle">
+                <figcaption>"Editable Children" lets you access the internal nodes without breaking the template connection</figcaption>
+            </figure>
+            <blockquote><strong>Don't use "Make Built-in"</strong> – that breaks the link to your template. "Editable Children" maintains the connection while letting you modify the instance.</blockquote>
+            
+            <p>Your scene structure should now look like:</p>
+            <div class="scene-structure">
+                ClockWidgetRoot (Control)<br>
+                └── GlassPanelTemplate (Control) [instanced]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;├── BlurPanel (Panel)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;├── GlassPanelPanel (Panel)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;└── ContentContainer (Control) ← We'll work inside here
+            </div>
+
+            <h3 id="resize-widget">2-4 Resize for Clock Widget</h3>
+            <p>The template is probably too big for a clock widget. Let's resize this instance.</p>
+            <ol>
+                <li><strong>Select the instanced GlassPanelTemplate</strong></li>
+                <li><strong>Layout → Anchors Preset:</strong> Should be "Custom" (if not, change it)</li>
+                <li><strong>Adjust Anchor Offsets for a smaller widget:</strong></li>
+            </ol>
+            <table>
+                <thead><tr><th>Field</th><th>Value</th></tr></thead>
+                <tbody>
+                    <tr><td>Left</td><td><strong>-250</strong> (250 px wide)</td></tr>
+                    <tr><td>Top</td><td><strong>20</strong> (small margin from screen top)</td></tr>
+                    <tr><td>Right</td><td><strong>0</strong> (stays anchored to right edge)</td></tr>
+                    <tr><td>Bottom</td><td><strong>120</strong> (100 px tall total)</td></tr>
+                </tbody>
+            </table>
+            <figure>
+                <img src="assets/blogAssets/ClockWidgetWalkthrough/clock_currency_widget_04_resize_anchor_offsets.png" alt="Resize anchor offsets">
+                <figcaption>Anchor offsets that create a 250×100 pixel widget in the top-right</figcaption>
+            </figure>
+            <p>💡 <strong>Remember the offset math:</strong> Left=-250 + Right=0 = 250 px width, Top=20 + Bottom=120 = 100 px height</p>
+            <p><strong>Test it:</strong> Press F5 to see your smaller widget-sized panel.</p>
+
+            <hr>
+            
+            <h2 id="building-layout">3. Building the Content Layout</h2>
+            
+            <h3 id="main-layout">3-1 Set Up the Main Layout Structure</h3>
+            <p>Time to build inside the ContentContainer. Navigate to it in your instanced glass panel.</p>
+            <ol>
+                <li><strong>Select ContentContainer:</strong></li>
+                <li><strong>Add MarginContainer:</strong> Right-click → Add Child → MarginContainer</li>
+                <li><strong>Rename to "GlassPanelMargin"</strong></li>
+                <li><strong>Layout → Anchors Preset:</strong> "Full Rect"</li>
+                <li><strong>Theme Overrides → Constants → Margins:</strong> Set all to 5 (creates clean spacing from glass edges)</li>
+                <li><strong>Add HBoxContainer:</strong> Right-click GlassPanelMargin → Add Child → HBoxContainer</li>
+                <li><strong>Rename to "MainLayout"</strong></li>
+                <li><strong>Layout → Alignment:</strong> Center (makes content look more polished)</li>
+                <li><strong>Theme Overrides → Constants → Separation:</strong> 4 (space between clock and currency sections)</li>
+            </ol>
+            <figure>
+                <img src="assets/blogAssets/ClockWidgetWalkthrough/clock_currency_widget_05_scene_tree_two_containers.png" alt="Scene tree with two containers">
+                <figcaption>MainLayout HBoxContainer inside GlassPanelMargin</figcaption>
+            </figure>
+
+            <h3 id="section-containers">3-2 Add Section Containers</h3>
+            <p>We'll use PanelContainer for each section – they handle both layout and can provide background styling.</p>
+            <ol>
+                <li><strong>Right-click MainLayout:</strong></li>
+                <li><strong>Add PanelContainer → rename to "ClockPanelContainer"</strong></li>
+                <li><strong>Add PanelContainer → rename to "DateCurrencyPanel"</strong></li>
+                <li><strong>Configure both PanelContainers:</strong></li>
+                <ul>
+                    <li><strong>Layout → Container Sizing → Horizontal:</strong> Fill, check Expand</li>
+                    <li><strong>Layout → Container Sizing → Vertical:</strong> Fill</li>
+                </ul>
+            </ol>
+            <blockquote><strong>Note:</strong> Container Sizing options are under Layout → Container Sizing, not in Theme Overrides.</blockquote>
+            <figure>
+                <img src="assets/blogAssets/ClockWidgetWalkthrough/clock_currency_widget_06_full_hierarchy.png" alt="Full hierarchy">
+                <figcaption>Complete scene hierarchy with all containers</figcaption>
+            </figure>
+
+            <h3 id="content-sections">3-3 Add Content Sections</h3>
+            <p>Now let's add the actual content nodes:</p>
+            <p><strong>Inside ClockPanelContainer:</strong></p>
+            <ul>
+                <li>Add Label → rename to "TimeLabel"</li>
+            </ul>
+            <p><strong>Inside DateCurrencyPanel:</strong></p>
+            <ul>
+                <li>Add VBoxContainer → rename to "ClockSection"</li>
+                <li>Add Label → rename to "DateLabel"</li>
+                <li>Add HBoxContainer → rename to "CurrencyRow"</li>
+                <li>Add TextureRect → rename to "CurrencyIcon"</li>
+                <li>Add Label → rename to "CurrencyLabel"</li>
+            </ul>
+            <p>Final structure:</p>
+            <div class="scene-structure">
+                ContentContainer<br>
+                └── GlassPanelMargin (MarginContainer)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;└── MainLayout (HBoxContainer)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── ClockPanelContainer (PanelContainer)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│   └── TimeLabel (Label)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── DateCurrencyPanel (PanelContainer)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── ClockSection (VBoxContainer)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── DateLabel (Label)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── CurrencyRow (HBoxContainer)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── CurrencyIcon (TextureRect)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── CurrencyLabel (Label)
+            </div>
+
+            <h3 id="configure-layout">3-4 Configure Content Layout</h3>
+            <p><strong>ClockPanelContainer:</strong></p>
+            <ul>
+                <li>Layout → Container Sizing → Horizontal: Fill, check Expand</li>
+                <li>Layout → Container Sizing → Vertical: Fill</li>
+            </ul>
+            <p><strong>TimeLabel:</strong></p>
+            <ul>
+                <li>Layout → Container Sizing → Horizontal: Fill</li>
+                <li>Layout → Container Sizing → Vertical: Fill, check Expand</li>
+                <li>Horizontal Alignment: Center</li>
+                <li>Vertical Alignment: Center</li>
+            </ul>
+            <p><strong>ClockSection:</strong></p>
+            <ul>
+                <li>Layout → Container Sizing → Horizontal: Fill</li>
+                <li>Layout → Container Sizing → Vertical: Fill</li>
+                <li>Alignment: Center</li>
+            </ul>
+            <figure>
+                <img src="assets/blogAssets/ClockWidgetWalkthrough/clock_currency_widget_07_panelcontainer_inspector.png" alt="PanelContainer inspector">
+                <figcaption>PanelContainer inspector settings</figcaption>
+            </figure>
+            <p><strong>DateLabel:</strong></p>
+            <ul>
+                <li>Layout → Container Sizing → Horizontal: Fill</li>
+                <li>Horizontal Alignment: Center</li>
+            </ul>
+            <p><strong>CurrencyRow (HBoxContainer):</strong></p>
+            <ul>
+                <li>Layout → Container Sizing → Horizontal: Fill</li>
+                <li>Alignment: Center</li>
+            </ul>
+            <p><strong>CurrencyIcon:</strong></p>
+            <ul>
+                <li>Layout → Container Sizing → Horizontal: Fill</li>
+                <li>Layout → Container Sizing → Vertical: Fill, check Expand</li>
+                <li>Stretch Mode: "Keep Aspect Centered"</li>
+                <li>Custom Minimum Size: x = 60, y = 50</li>
+                <li>Expand: check this</li>
+            </ul>
+            <p><strong>CurrencyLabel:</strong></p>
+            <ul>
+                <li>Layout → Container Sizing → Horizontal: Fill</li>
+                <li>Layout → Container Sizing → Vertical: Fill, check Expand</li>
+                <li>Horizontal Alignment: Center</li>
+                <li>Vertical Alignment: Center</li>
+            </ul>
+
+            <hr>
+            
+            <h2 id="content-styling">4. Adding Content & Styling</h2>
+            
+            <h3 id="placeholder-content">4-1 Add Placeholder Content</h3>
+            <p>Let's add temporary content so we can see the layout while styling.</p>
+            <ul>
+                <li><strong>TimeLabel:</strong> Text = "7:47 PM"</li>
+                <li><strong>DateLabel:</strong> Text = "Day: 242"</li>
+                <li><strong>CurrencyLabel:</strong> Text = "100"</li>
+                <li><strong>CurrencyIcon:</strong></li>
+                <ul>
+                    <li>Find a currency icon (coin, gold piece, etc. – 32×32 PNG works well)</li>
+                    <li>Drag the image file into your Godot project</li>
+                    <li>Texture: Drag the image from FileSystem to this property</li>
+                </ul>
+            </ul>
+            <figure>
+                <img src="assets/blogAssets/ClockWidgetWalkthrough/clock_currency_widget_08_placeholder_editor_view.png" alt="Placeholder content in editor">
+                <figcaption>Widget with placeholder content visible in the editor</figcaption>
+            </figure>
+
+            <h3 id="custom-fonts">4-2 Set Up Custom Fonts</h3>
+            <p>Professional fonts make a huge difference.</p>
+            <ol>
+                <li><strong>Get a font:</strong> download from Google Fonts (Roboto, Open Sans work well) or use any .ttf/.otf you have; drag it into the project</li>
+                <li><strong>Apply directly:</strong> select each label → Theme Overrides → Fonts → Font: drag the .ttf here</li>
+            </ol>
+            <p><strong>Font sizes I'm experimenting with:</strong></p>
+            <ul>
+                <li>TimeLabel: 22 px</li>
+                <li>DateLabel: 11 px</li>
+                <li>CurrencyLabel: 14 px</li>
+            </ul>
+
+            <h3 id="text-readability">4-3 Improve Text Readability</h3>
+            <p>Text on glass backgrounds needs help to be readable.</p>
+            <p><strong>For all labels, add outlines:</strong></p>
+            <ul>
+                <li>Theme Overrides → Colors → Font Outline Color: Black (R = 0, G = 0, B = 0, A = 1)</li>
+                <li>Theme Overrides → Constants → Outline Size: 3</li>
+            </ul>
+            <blockquote><strong>Note:</strong> You need both color and size for an outline to appear.</blockquote>
+            <p><strong>Text colors:</strong> all White.</p>
+
+            <h3 id="panel-backgrounds">4-4 Style the Panel Backgrounds</h3>
+            <p>I wanted subtle dark backgrounds to help differentiate each section:</p>
+            <p><strong>Both PanelContainers → Theme Overrides → Styles → Panel:</strong></p>
+            <ul>
+                <li>New StyleBoxFlat</li>
+                <li>Background Color: black, 30% alpha (R = 0, G = 0, B = 0, A ≈ 0.3)</li>
+                <li>Corner Radius: 8 px on all corners</li>
+                <li>Border settings: tweak as you like for separation</li>
+            </ul>
+
+            <hr>
+            
+            <h2 id="final-tweaks">5. Final Layout Tweaks</h2>
+            
+            <h3 id="fine-tune-spacing">5-1 Fine-tune Spacing</h3>
+            <ul>
+                <li>MainLayout → Separation: 4 px</li>
+            </ul>
+
+            <h3 id="test-everything">5-2 Test Everything</h3>
+            <p>Press F5 and you should see:</p>
+            <ul>
+                <li>✅ Professional-looking glass widget in top-right</li>
+                <li>✅ Large time display on the left</li>
+                <li>✅ Date and currency stacked on the right</li>
+                <li>✅ Currency icon properly sized next to amount</li>
+                <li>✅ Text that's easy to read with good contrast</li>
+                <li>✅ Clean spacing and proportions</li>
+                <li>✅ Layout that scales nicely</li>
+            </ul>
+            <figure>
+                <img src="assets/blogAssets/ClockWidgetWalkthrough/clock_currency_widget_09_final_ingame.png" alt="Final widget in game">
+                <figcaption>Final widget running in the game</figcaption>
+            </figure>
+
+            <hr>
+            
+            <h2 id="advanced-notes">6. Advanced Layout Notes</h2>
+            
+            <h3 id="instancing-vs-inheritance">6-1 Using Instancing vs Inheritance</h3>
+            <p>Why we used instancing instead of inheritance:</p>
+            <ul>
+                <li>✅ <strong>Reusable template:</strong> GlassPanel.tscn can be used for menus, dialogs, any UI overlay</li>
+                <li>✅ <strong>Focused scripts:</strong> clock widget gets its own script, separate from glass-panel logic</li>
+                <li>✅ <strong>Maintainable:</strong> improvements to glass effect automatically update all widgets</li>
+                <li>✅ <strong>Flexible:</strong> easy to create different widget types without code conflicts</li>
+            </ul>
+            <p>When you instance a scene, you can:</p>
+            <ul>
+                <li>✅ Resize and reposition that specific instance</li>
+                <li>✅ Modify colors, fonts, styling for that instance</li>
+                <li>✅ Add different content to each instance</li>
+                <li>🔗 Still get automatic updates when the template scene changes</li>
+            </ul>
+
+            <h3 id="container-sizing">6-2 Container Sizing Quick Reference</h3>
+            <ul>
+                <li><strong>Fill:</strong> takes available space in that direction</li>
+                <li><strong>Expand:</strong> grows beyond minimum size if parent has extra space</li>
+                <li><strong>Fill + Expand:</strong> takes space and grows with parent</li>
+                <li><strong>Shrink Center/End:</strong> aligns content when smaller than available space</li>
+            </ul>
+
+            <h3 id="margin-container">6-3 Using MarginContainer for Clean Spacing</h3>
+            <p>The MarginContainer (GlassPanelMargin) with 5 px margins creates clean spacing inside the glass-panel effect. This ensures your content doesn't touch the glass borders and maintains a professional look.</p>
+
+            <hr>
+            
+            <h2 id="next-steps">7. What's Next</h2>
+            <p>You now have a beautiful static widget that looks professional and matches your game's aesthetic. The layout is solid and ready for dynamic content.</p>
+            <p><strong>Coming next:</strong></p>
+            <ul>
+                <li>Making the clock update in real time</li>
+                <li>Displaying dynamic currency amounts from game state</li>
+                <li>Managing currency-icon swaps for different currency types</li>
+                <li>Formatting numbers with separators (1,000 vs 1000)</li>
+                <li>Basic scripting to tie it all together</li>
+            </ul>
+            <p>The visual foundation is complete – now we make it functional!</p>
+
+            <hr>
+            
+            <h2 id="my-takeaways">8. My Takeaways</h2>
+            
+            <h3 id="what-worked">8-1 What worked really well</h3>
+            <ul>
+                <li>Instancing approach for reusability</li>
+                <li>PanelContainer for section backgrounds</li>
+                <li>Direct .ttf font application (no FontFile resources)</li>
+                <li>Container sizing for responsive layout</li>
+                <li>MarginContainer for clean internal spacing</li>
+            </ul>
+
+            <h3 id="what-tripped-me-up">8-2 Things that tripped me up</h3>
+            <ul>
+                <li>Node2D root doesn't work for UI anchoring – always use Control</li>
+                <li>Need "Editable Children" on instanced scenes to access internal nodes</li>
+                <li>Outline needs both color and size to be visible</li>
+                <li>Container Sizing is under Layout → Container Sizing, not in Theme Overrides</li>
+            </ul>
+
+            <h3 id="techniques-worth-remembering">8-3 Techniques worth remembering</h3>
+            <ul>
+                <li>Custom Minimum Size for precise control</li>
+                <li>Negative separation values for tight text stacking (-7 px in ClockSection)</li>
+                <li>Keep Aspect Centered for icons that need to scale</li>
+                <li>Center alignment on containers for a polished look</li>
+                <li>Transform Size on VBoxContainers for proportional control</li>
+            </ul>
+
+            <p>Save this scene as a template – it's a solid foundation for any kind of game-UI widget!</p>
+
+        </article>
+
+    </div>
+    <aside class="tutorial-sidebar">
+      <h3>On This Page</h3>
+      <ul>
+        <li><a href="#what-youll-build">1. What You'll Build</a></li>
+        <li><a href="#project-setup">2. Project Setup & Scene Structure</a></li>
+        <li><a href="#building-layout">3. Building the Content Layout</a></li>
+        <li><a href="#content-styling">4. Adding Content & Styling</a></li>
+        <li><a href="#final-tweaks">5. Final Layout Tweaks</a></li>
+        <li><a href="#advanced-notes">6. Advanced Layout Notes</a></li>
+        <li><a href="#next-steps">7. What's Next</a></li>
+        <li><a href="#my-takeaways">8. My Takeaways</a></li>
+      </ul>
+    </aside>
+  </div>
+</body>
+</html> 
