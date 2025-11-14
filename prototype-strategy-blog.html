@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thinking Through Our Prototype Strategy - Pretty Deece Games</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: var(--background);
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+    }
+
+    .tutorial-container {
+      display: flex;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .tutorial-content {
+      flex: 3;
+      background: var(--white);
+      padding: 3rem 4rem;
+      border-radius: 1rem;
+      box-shadow: var(--shadow-lg);
+      text-align: left;
+    }
+
+    /* Improve readability with max-width on paragraphs */
+    .tutorial-content p {
+      max-width: 65ch;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .tutorial-sidebar {
+      flex: 1;
+      position: sticky;
+      top: 2rem;
+      height: fit-content;
+      padding: 1.5rem;
+      background: var(--white);
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--secondary);
+    }
+
+    .tutorial-sidebar h3 {
+      margin-top: 0;
+      color: var(--primary);
+      border-bottom: 2px solid var(--light-gray);
+      padding-bottom: 0.5rem;
+    }
+
+    .tutorial-sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tutorial-sidebar ul li a {
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--light-gray);
+      transition: color 0.2s ease;
+      font-weight: 500;
+    }
+    
+    .tutorial-sidebar ul li a:hover {
+      color: var(--secondary);
+    }
+
+    .tutorial-content h1, .tutorial-content h2, .tutorial-content h3 {
+      color: var(--primary);
+      margin-top: 2.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tutorial-content h1 {
+        font-size: 2.5rem;
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    .tutorial-content .subtitle {
+        font-size: 1.1rem;
+        color: var(--text);
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    .tutorial-content hr {
+        border: 0;
+        border-top: 1px solid #e0e0e0;
+        margin: 3rem 0;
+    }
+
+    .tutorial-content figure {
+        margin: 2rem 0;
+        text-align: center;
+    }
+
+    .tutorial-content img {
+        max-width: 100%;
+        border-radius: 0.5rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .tutorial-content figcaption {
+        font-size: 0.9rem;
+        color: #777;
+        margin-top: 0.75rem;
+        font-style: italic;
+    }
+    
+    .tutorial-content ul, .tutorial-content ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1.5rem;
+        max-width: 65ch;
+    }
+    
+    .tutorial-content li {
+        margin-bottom: 0.75rem;
+        line-height: 1.8;
+    }
+
+    .tutorial-content a {
+        color: var(--secondary);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-bottom-color 0.2s ease;
+    }
+
+    .tutorial-content a:hover {
+        border-bottom-color: var(--secondary);
+    }
+
+    .tutorial-content .blog-button {
+        color: var(--white) !important;
+        border-bottom: none;
+    }
+
+    .tutorial-content .blog-button:hover {
+        border-bottom: none;
+    }
+
+    .tutorial-content blockquote {
+        border-left: 4px solid var(--secondary);
+        padding: 1rem 1.5rem;
+        margin: 1.5rem 0;
+        font-style: italic;
+        color: var(--text);
+        background-color: #f8f9fa;
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+
+    .tutorial-content blockquote strong {
+        font-style: normal;
+    }
+
+    .back-button {
+      margin-bottom: 2rem;
+      display: inline-block;
+      font-weight: 600;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .tutorial-container {
+        flex-direction: column;
+      }
+      
+      .tutorial-content {
+        padding: 2rem 1.5rem;
+      }
+      
+      .tutorial-sidebar {
+        position: relative;
+        top: 0;
+        margin-top: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="tutorial-container">
+    <div class="tutorial-content">
+        <a href="blog.html" class="blog-button back-button">← Back to Blog</a>
+        <article>
+            <h1 id="main-title">Thinking Through Our Prototype Strategy</h1>
+            
+            <hr>
+            
+            <h2 id="where-were-at">Where We're At</h2>
+            <p>We're currently working on a prototype for our game, Dragon Country. Our next major milestone is to take it public and get some real feedback on it. Before we toss it out there, we wanted to make sure we actually knew what we were doing with it. Basically, why bother with a public prototype at all?</p>
+            
+            <p>I recently watched a video on YouTube by Game Maker's Toolkit called <a href="https://youtu.be/8tHJgtbj6rs" target="_blank" rel="noopener noreferrer">"What's the point of prototyping?"</a> and it really got me thinking. The video talked about what you use a prototype for, some of the things you can do with prototypes, keeping them simple, and the reasons to even make one in the first place. It was really interesting stuff, and it caught my attention because our group had recently been discussing the differences between a demo and a prototype. It kind of felt like we were making something in between a prototype and a demo and we needed to better define what we were making and why.</p>
+
+            <figure>
+                <img src="assets/blogAssets/PrototypeStrategy/blogvideo1.gif" alt="Dragon Country prototype gameplay">
+                <figcaption>Our Dragon Country prototype in action</figcaption>
+            </figure>
+
+            <hr>
+            
+            <h2 id="why-make-prototype-public">Why Make a Prototype Public At All?</h2>
+            <p>We want to see what the public thinks. We think we can get a larger range of feedback and experience by taking it public, and more appropriate experience too. We can target some of the different communities that fit our genre - like maybe we want to ask the comfy game players what they think to see if it's going to be considered a comfy game, or if it's too much of a stretch with the dragons. Maybe we want to check with the farming sim community and get their feedback. By having a public prototype, we think we'll be able to get the feedback that's most appropriate for us.</p>
+            
+            <p>The alternative seems like spending 3+ years building something and then finding out there are major issues with our core concepts.</p>
+
+            <hr>
+            
+            <h2 id="what-were-testing">What We're Actually Testing</h2>
+            <p>This is where we need to get specific. Honestly, this is our next work to do. It's not just "is it fun?" We need measurable things. Does the core mechanic work? Where do players quit? What do they want more of?</p>
+            
+            <p>For us specifically, we're testing a few core loops: collecting resources, using those resources to hatch dragon eggs, and then using what comes out of those eggs as currency to fund growing your farm and accomplishing other activities. We want it to make the scope of the prototype as small as possible while still enabling us to get the feedback and testing we're looking for.</p>
+            
+            <p>One thing we know we want to test is the reception of mixing 2D and 3D. We're combining pixel art 3D environments with pixel art 2D sprites, and we want to see how that comes across to people. We want to explore what people notice about our art style. We feel pretty confident in our art style actually, which makes it seem a lot more polished than what other prototypes might be.</p>
+            
+            <p>Why does that matter? I think it matters because of how much we're putting into the prototype and how much effort we spend before we start getting that public testing. We don't want to spend too much time so we can adjust things early on. But we want it to have a good enough experience to at least present the core idea of the game, so we get the correct feedback that we're targeting.</p>
+            
+            <p>Our next step is to define those specific goals and build measurement right into the prototype itself. Things like playtime metrics, completion rates, specific feedback questions. What would make us continue versus pivot? We're still figuring that part out.</p>
+
+            <hr>
+            
+            <h2 id="steam-page-decision">One Key Decision: Steam Page Before Going Public</h2>
+            <p>We're not just putting this on <a href="http://itch.io" target="_blank" rel="noopener noreferrer">itch.io</a>, we're also planning to set up a Steam page at the same time.</p>
+            
+            <p>Why?</p>
+            
+            <p>We know from Chris Zukowski's guidance at <a href="https://howtomarketagame.com/" target="_blank" rel="noopener noreferrer">How to Market a Game</a> that you should get a Steam page up as early as you can. You can collect wishlists, and there's not really a downside to having a Steam page. Now, we wanted to have enough content that we could make a good Steam page - we want to be able to give an idea of what the game would look like, what the core gameplay loops are. We wanted to have a stronger representation of where the game is headed.</p>
+            
+            <p>And it kind of made sense that as we work on the prototype, the prototype would basically have all the different elements that we would need or want for creating the Steam page anyway. So then for the timing, we considered when to make a Steam page versus when to launch the prototype, and we figured that on the off chance the prototype goes viral or people really enjoy it or they want to support us (really any of those different conditions would be amazing!) we could have them go to the Steam page and wishlist there. From the start of development, we planned to target Steam as our first way to release this game when it's finished.</p>
+
+            <figure>
+                <img src="assets/blogAssets/PrototypeStrategy/prototypetosteamanditch.png" alt="Prototype development branching to Itch.io and Steam page launches">
+                <figcaption>Our launch strategy: prototype development leading to simultaneous Itch.io and Steam page launches</figcaption>
+            </figure>
+
+            <h3 id="the-problem">The Problem</h3>
+            <p>Viral moments on itch.io are unpredictable. I did some research and found that successful developers often said things like "we didn't do anything, people just started streaming it" or "I don't know, itch.io just tweeted about it for some reason." When that happens, you need somewhere to direct the interest.</p>
+            
+            <p>When I would do research or read posts on Reddit, it kind of felt like developers were saying they missed the boat on not having a Steam page. It seemed like they were mentioning it as a warning to others - for other developers to learn from their lessons. And if I can learn from others, I want to try to take action.</p>
+            
+            <p>Here's a good example: The Roottrees Are Dead went viral on itch.io in November 2023. They were getting great numbers, Day9 was streaming it, AV Club named it one of the best games of the year. But they didn't launch their Steam page until February 2024 - three months later. That's three months of momentum with nowhere to capture wishlists. <a href="https://howtomarketagame.com/2025/04/28/how-an-itch-io-game-became-a-million-dollar-hit-the-roottrees-are-dead/" target="_blank" rel="noopener noreferrer">Source - HTMAG</a></p>
+
+            <figure>
+                <img src="assets/blogAssets/PrototypeStrategy/missingwishlisttimeline.png" alt="Timeline showing November 2023 viral moment, 3 months gap, and February 2024 Steam page launch">
+                <figcaption>The Roottrees Are Dead: three months of missed wishlist opportunities</figcaption>
+            </figure>
+            
+            <p>Compare that to 20 Minutes Till Dawn. That developer launched both platforms simultaneously in April 2022. The itch.io prototype brought in 200 wishlists right away on Steam. When the game went viral during Steam's Going Rogue Festival, he was able to capture all that interest. He launched with 143,196 wishlists and earned $538,000 in the first week. <a href="https://howtomarketagame.com/2022/06/14/20-minutes-till-dawn/" target="_blank" rel="noopener noreferrer">Source - HTMAG</a></p>
+            
+            <p>Or NIMRODS - their developer said "it was always the aim for the first vertical slice to go to itch for feedback. We were impressed by games like 20 Minutes Till dawn and their path to steam launch." They explicitly kept their demo up because "the demo itself links to our steam page." <a href="https://howtomarketagame.com/2025/05/22/more-games-that-made-the-itch-io-to-steam-transition/" target="_blank" rel="noopener noreferrer">Source - HTMAG</a></p>
+
+            <h3 id="our-logic">Our Logic</h3>
+            <p>There's some upfront cost ($100 for the Steam page), and once we have the content, there's really not a downside. If a person wasn't initially inclined to wishlist our page, they wouldn't wishlist whether the page existed or not. However, if a page doesn't exist, someone who would have wishlisted it wouldn't be able to.</p>
+            
+            <p>Best case: the prototype takes off and we capture wishlists. Typical case: modest traffic, we start building wishlists slowly. Low wishlist case: we learned early and cheap. All cases are better than missing a viral moment.</p>
+
+            <hr>
+            
+            <h2 id="next-steps">Our Next Steps</h2>
+            <p>So here's what we're doing:</p>
+            
+            <ol>
+                <li><strong>Define specific goals for the prototype</strong> - what exactly are we testing? We need to nail this down.</li>
+                <li><strong>Build measurement into the prototype itself</strong> - add the tracking and feedback mechanisms we need to get real data.</li>
+                <li><strong>Set up the Steam page before the itch.io launch</strong> - get it ready with screenshots, gameplay trailer, and all that. We'll probably start looking for a key art artist sooner rather than later because finding the right artist may take some time.</li>
+                <li><strong>Create the itch.io page with a clear Steam link</strong> - make it easy for players to find their way to wishlist if they want to.</li>
+                <li><strong>Launch and start gathering data</strong> - then we'll see what happens and adjust from there.</li>
+            </ol>
+            
+            <p>That's where we're at. Next up: nailing down those specific goals and metrics.</p>
+
+        </article>
+
+    </div>
+    <aside class="tutorial-sidebar">
+      <h3>On This Page</h3>
+      <ul>
+        <li><a href="#where-were-at">Where We're At</a></li>
+        <li><a href="#why-make-prototype-public">Why Make a Prototype Public At All?</a></li>
+        <li><a href="#what-were-testing">What We're Actually Testing</a></li>
+        <li><a href="#steam-page-decision">One Key Decision: Steam Page Before Going Public</a></li>
+        <li><a href="#the-problem">The Problem</a></li>
+        <li><a href="#our-logic">Our Logic</a></li>
+        <li><a href="#next-steps">Our Next Steps</a></li>
+      </ul>
+    </aside>
+  </div>
+</body>
+</html>
+
