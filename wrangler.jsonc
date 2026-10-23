@@ -1,0 +1,9 @@
+{
+  // Cloudflare Workers static site config for prettydeecegames.com.
+  // The whole repo root is the site; .assetsignore keeps repo files out.
+  "name": "prettydeecegames-github-io",
+  "compatibility_date": "2025-10-01",
+  "assets": {
+    "directory": "./"
+  }
+}
