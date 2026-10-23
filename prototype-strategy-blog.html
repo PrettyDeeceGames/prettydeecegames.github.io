@@ -106,8 +106,10 @@
         text-align: center;
     }
 
-    .tutorial-content img {
+    .tutorial-content img,
+    .tutorial-content video {
         max-width: 100%;
+        height: auto;
         border-radius: 0.5rem;
         box-shadow: var(--shadow-sm);
     }
@@ -204,7 +206,10 @@
             <p>I recently watched a video on YouTube by Game Maker's Toolkit called <a href="https://youtu.be/8tHJgtbj6rs" target="_blank" rel="noopener noreferrer">"What's the point of prototyping?"</a> and it really got me thinking. The video talked about what you use a prototype for, some of the things you can do with prototypes, keeping them simple, and the reasons to even make one in the first place. It was really interesting stuff, and it caught my attention because our group had recently been discussing the differences between a demo and a prototype. It kind of felt like we were making something in between a prototype and a demo and we needed to better define what we were making and why.</p>
 
             <figure>
-                <img src="assets/blogAssets/PrototypeStrategy/blogvideo1.gif" alt="Dragon Country prototype gameplay">
+                <video poster="assets/blogAssets/PrototypeStrategy/blogvideo1-poster.jpg" width="1008" height="580" autoplay muted loop playsinline aria-label="Dragon Country prototype gameplay">
+                    <source src="assets/blogAssets/PrototypeStrategy/blogvideo1.webm" type="video/webm">
+                    <source src="assets/blogAssets/PrototypeStrategy/blogvideo1.mp4" type="video/mp4">
+                </video>
                 <figcaption>Our Dragon Country prototype in action</figcaption>
             </figure>
 
