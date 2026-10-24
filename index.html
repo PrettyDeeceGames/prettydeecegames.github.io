@@ -2,18 +2,160 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Pretty Deece Games</title>
+  <meta name="description" content="We make pretty deece games. A small studio of friends in Idaho building games on nights and weekends. Our current obsession is Dragon Country.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pretty Deece Games">
+  <meta property="og:title" content="Pretty Deece Games">
+  <meta property="og:description" content="We make pretty deece games. A small studio of friends in Idaho building games on nights and weekends. Our current obsession is Dragon Country.">
+  <meta property="og:url" content="https://prettydeecegames.com/">
+  <meta property="og:image" content="https://prettydeecegames.com/assets/logoOG.png">
+  <meta name="theme-color" content="#79c4eb">
   <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Karla:wght@400;700&family=Space+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="home.css">
 </head>
 <body>
 
-  <div class="container">
-    <img src="assets/logo.png" alt="Pretty Deece Games Logo" class="logo-centered">
-    <h1>Something is hatching... Check back soon!</h1>
-    <a href="blog.html" class="blog-button">Blog</a>
-  </div>
+  <nav aria-label="Main">
+    <div class="wrap">
+      <a href="#top" class="namemark" aria-label="Pretty Deece Games home">PRETTY DEECE GAMES</a>
+      <div class="links">
+        <a href="#games">GAMES</a>
+        <a href="#devlog">DEVLOG</a>
+        <a href="#contact">CONTACT</a>
+        <a class="btn yolk" href="https://store.steampowered.com/app/4455310/Dragon_Country/">WISHLIST DRAGON COUNTRY</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="wrap">
+      <div class="copy">
+        <span class="eyebrow">Idaho Based Indie Game Studio</span>
+        <h1>We make pretty deece games.</h1>
+        <p class="lead">We're a small studio of friends in Idaho building games on nights and weekends. Our current obsession is Dragon Country.</p>
+        <div class="row">
+          <a class="btn dark" href="#games">SEE DRAGON COUNTRY</a>
+          <a class="btn shadow" href="#devlog">READ THE DEVLOG</a>
+        </div>
+      </div>
+      <div class="art">
+        <img src="assets/home/ostrich_full.png" width="346" height="612" alt="The Pretty Deece ostrich, in glasses">
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="games">
+      <div class="wrap">
+        <h2>Our games</h2>
+        <article class="game">
+          <div class="pic"><img src="assets/home/dc_vertical.jpg" width="748" height="896" alt="Dragon Country capsule art: the logo over a sunset with two dragons"></div>
+          <div class="info">
+            <span class="status">IN DEVELOPMENT</span>
+            <h3>Dragon Country</h3>
+            <p class="hook">A fresh start, a new home, and more dragons than you can raise.</p>
+            <p style="font-size:19px">Dragon Country is a cozy dragon-ranching sim.</p>
+            <ul class="chips"><li>PC</li><li>CO-OP</li><li>SPLIT-SCREEN</li><li>MADE IN GODOT</li></ul>
+            <div class="shot"><img src="assets/home/care_still.jpg" width="720" height="405" loading="lazy" alt="Gameplay: a rancher and an axe dragon by the cooking kettle and grill"></div>
+            <div class="row">
+              <a class="btn yolk" href="https://store.steampowered.com/app/4455310/Dragon_Country/">WISHLIST ON STEAM</a>
+              <a class="btn" href="https://discord.gg/8cb3WNX6xS">DISCORD</a>
+              <span class="btn soon">ITCH.IO PREQUEL <small>SOON</small></span>
+            </div>
+          </div>
+        </article>
+        <p class="award">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"></circle><path d="M8.5 14 7 22l5-3 5 3-1.5-8"></path></svg>
+          <span><b>DIY Darling</b> · Indie Mountain West Awards 2026</span>
+        </p>
+        <article class="egg">
+          <span class="qmark" aria-hidden="true">?</span>
+          <div class="txt">
+            <h3>Game two</h3>
+            <p>Whoa! Chill! We are still working on our first pretty deece game.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="motto">
+      <div class="wrap">
+        <span class="eyebrow">OUR MOTTO</span>
+        <p class="big">Everything is Figureoutable.</p>
+        <p class="sub">Making games is hard. Our "Everything is Figureoutable" motto helps us keep going.</p>
+      </div>
+    </section>
+
+    <section class="blog" id="devlog">
+      <div class="wrap">
+        <div class="blog-head">
+          <div>
+            <h2>The Pretty Deece Blog</h2>
+            <p>Updates, insights, and stuff.</p>
+          </div>
+          <a class="all-posts" href="blog.html">ALL POSTS</a>
+        </div>
+        <div class="posts">
+          <article class="post">
+            <img src="assets/home/post-prototype-strategy.jpg" width="800" height="476" loading="lazy" alt="Diagram: prototype development splitting into an itch.io launch and a Steam page launch">
+            <div class="body">
+              <span class="date">NOVEMBER 13, 2025</span>
+              <h3>Thinking Through Our Prototype Strategy</h3>
+              <p>We're currently working on a prototype for our game, Dragon Country.</p>
+              <a href="prototype-strategy-blog.html">Read more</a>
+            </div>
+          </article>
+          <article class="post">
+            <img src="assets/home/post-clock-widget.jpg" width="800" height="480" loading="lazy" alt="The in-game clock and currency panel over the ranch">
+            <div class="body">
+              <span class="date">MAY 22, 2025</span>
+              <h3>Glass Panel Clock &amp; Currency UI - Part 2</h3>
+              <p>Been working on turning that glass panel template into something actually useful – a clock-and-currency widget for the top-right corner.</p>
+              <a href="godot-clock-widget-tutorial.html">Read more</a>
+            </div>
+          </article>
+          <article class="post">
+            <img src="assets/home/post-glass-panel.jpg" width="800" height="450" loading="lazy" alt="A frosted-glass UI panel floating over a grassy game scene">
+            <div class="body">
+              <span class="date">MAY 21, 2025</span>
+              <h3>Reusable Frosted-Glass UI Panel in Godot 4.x</h3>
+              <p>Hey! I put together some notes for myself (and maybe you'll find them handy too) on how to build a reusable frosted-glass UI panel in Godot 4.x.</p>
+              <a href="godot-glass-panel-tutorial.html">Read more</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="wrap">
+      <div class="cols">
+        <div>
+          <h2>HANG OUT</h2>
+          <a href="https://discord.gg/8cb3WNX6xS">Discord</a>
+          <a href="https://www.tiktok.com/@pretty.deece.game">TikTok</a>
+          <a href="https://www.instagram.com/prettydeecegames/">Instagram</a>
+          <a href="https://www.youtube.com/@PrettyDeeceGames">YouTube</a>
+          <a href="https://x.com/PrettyDeeceGame">X</a>
+        </div>
+        <div>
+          <h2>PRESS &amp; BUSINESS</h2>
+          <a href="mailto:info@prettydeecegames.com">info@prettydeecegames.com</a>
+          <span><b>Press kit</b> <span class="soft soon-note">(coming soon)</span></span>
+        </div>
+      </div>
+      <div class="legal">
+        <span class="namemark">PRETTY DEECE GAMES</span>
+        <span class="soft">© 2026 Pretty Deece Games LLC · Idaho</span>
+      </div>
+    </div>
+  </footer>
 
 </body>
 </html>
