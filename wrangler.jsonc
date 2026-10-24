@@ -3,6 +3,11 @@
   // The whole repo root is the site; .assetsignore keeps repo files out.
   "name": "prettydeecegames-github-io",
   "compatibility_date": "2025-10-01",
+  // The public address is prettydeecegames.com, so the default
+  // *.workers.dev address stays off. Preview URLs stay on so every
+  // branch and pull request gets its own review link.
+  "workers_dev": false,
+  "preview_urls": true,
   "assets": {
     "directory": "./"
   }
