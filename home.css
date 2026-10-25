@@ -99,6 +99,18 @@ footer a{color:var(--paper);font-weight:700;text-decoration:none}
 footer a:hover{text-decoration:underline}
 .soft{color:var(--purple-soft)}
 .soon-note{font-family:var(--mono);font-size:12px}
+.cols .news{flex:1.3 1 380px}
+.news-title{font-family:var(--display)!important;font-size:clamp(26px, 3vw, 34px)!important;letter-spacing:0!important;color:var(--paper)!important;font-weight:900!important;text-transform:uppercase}
+.news-form{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.news-form label{font-weight:700;font-size:15px}
+.news-row{display:flex;flex-wrap:wrap;gap:10px}
+.news-row input{flex:1 1 220px;min-width:0;min-height:52px;padding:0 16px;border-radius:12px;border:3px solid var(--ink);background:var(--paper);color:var(--ink);font-family:inherit;font-size:17px}
+.news-row button{min-height:52px;padding:0 22px;border-radius:12px;border:3px solid var(--ink);background:var(--yolk);color:var(--ink);font-family:var(--display);font-weight:800;font-size:15px;cursor:pointer}
+.news-row button:disabled{opacity:.6;cursor:wait}
+.news-status{font-weight:700;padding:10px 14px;border-radius:10px}
+.news-status.ok{background:var(--yolk);color:var(--ink)}
+.news-status.err{background:#ffd6e7;color:#8a1450}
+[hidden]{display:none!important}
 .legal{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding-top:24px;border-top:1px solid rgba(255,255,255,.25)}
 .legal .namemark{color:var(--paper)}
 .legal span{font-size:15px}

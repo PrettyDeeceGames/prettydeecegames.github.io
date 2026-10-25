@@ -136,6 +136,18 @@
   <footer id="contact">
     <div class="wrap">
       <div class="cols">
+        <div class="news">
+          <h2 class="news-title">Get the newsletter</h2>
+          <p class="soft">Come along for the ride! We'll keep you updated with news, big wins, and celebrations.</p>
+          <form id="newsletter" class="news-form" action="https://app.kit.com/forms/10093516/subscriptions" method="post">
+            <label for="email-pdg">Email address</label>
+            <div class="news-row">
+              <input id="email-pdg" name="email_address" type="email" placeholder="you@example.com" autocomplete="email" required>
+              <button type="submit">SIGN UP</button>
+            </div>
+            <p class="news-status" role="status" aria-live="polite" hidden></p>
+          </form>
+        </div>
         <div>
           <h2>HANG OUT</h2>
           <a href="https://discord.gg/8cb3WNX6xS">Discord</a>
@@ -157,5 +169,34 @@
     </div>
   </footer>
 
+  <script>
+    (function () {
+      var form = document.getElementById('newsletter');
+      if (!form || !window.fetch) return;
+      var status = form.querySelector('.news-status');
+      var button = form.querySelector('button');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        button.disabled = true;
+        status.hidden = true;
+        fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+          .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, d: d }; }); })
+          .then(function (res) {
+            if (res.ok && (!res.d.status || res.d.status === 'success')) {
+              form.querySelector('.news-row').hidden = true;
+              form.querySelector('label').hidden = true;
+              status.textContent = 'Success! Now check your email to confirm your subscription.';
+              status.className = 'news-status ok';
+            } else {
+              status.textContent = 'That didn\u2019t go through. Check the email address and try again.';
+              status.className = 'news-status err';
+              button.disabled = false;
+            }
+            status.hidden = false;
+          })
+          .catch(function () { form.submit(); });
+      });
+    })();
+  </script>
 </body>
 </html>
