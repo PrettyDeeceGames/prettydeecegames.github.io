@@ -89,6 +89,17 @@ h2{font-weight:900;font-size:clamp(32px, 4.5vw, 48px);letter-spacing:-.01em;text
 .post p{font-size:16px;color:var(--muted)}
 .post a{font-weight:700}
 
+/* Team */
+.team-head{display:flex;flex-direction:column;gap:12px;max-width:760px}
+.team-head p{font-size:20px}
+.people{display:flex;flex-wrap:wrap;gap:20px}
+.person{flex:1 1 320px;min-width:0;border:3px solid var(--ink);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:10px;background:var(--paper)}
+.person h3{font-weight:900;font-size:24px;text-transform:uppercase}
+.role{font-family:var(--mono);font-size:13px;font-weight:700}
+.notefrom{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.note{font-size:17px;line-height:1.5}
+.faves{font-size:15px;color:var(--muted);margin-top:auto;padding-top:6px}
+
 /* Footer */
 footer{background:var(--purple);color:var(--paper);border-top:3px solid var(--ink)}
 footer > .wrap{padding-top:64px;padding-bottom:36px;display:flex;flex-direction:column;gap:44px}
